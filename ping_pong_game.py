@@ -9,7 +9,7 @@ def show_menu():  # function to handle the menu
     menu_running = True
     while menu_running:
 
-        screen.fill((0, 120, 0))  # menu background color green
+        screen.fill((0, 0, 0))  # menu background color black
         button_bg_color = (100, 100, 100)  # button background color gray
         text_color = (255, 255, 255)  # text color white
 
