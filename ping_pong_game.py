@@ -1,15 +1,18 @@
 import pygame
-# import pygame.joystick
 
+
+# import pygame.joystick
+# 
 
 def show_menu():  # function to handle the menu
     # the comment below is some jetbrains thing regarding the global var
     # noinspection PyGlobalUndefined
+
     global game_mode
     menu_running = True
     while menu_running:
 
-        screen.fill((0, 0, 0))  # menu background color black
+        screen.fill((220, 220, 0))  # menu background color black
         button_bg_color = (100, 100, 100)  # button background color gray
         text_color = (255, 255, 255)  # text color white
 
@@ -95,7 +98,7 @@ ball = pygame.Surface((15, 15))
 
 ball.fill((255, 255, 255))  # color the ball
 
-ball_rect = ball.get_rect()
+ball_rect = ball.get_rect()  # for collisions
 
 # movement speed
 paddle_speed = 10
@@ -110,15 +113,15 @@ ball_rect.center = (WIDTH // 2, HEIGHT // 2)  # position ball centered at start
 running = True
 while running:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # (exit button)
             running = False
 
     keys = pygame.key.get_pressed()
 
     # left paddle movement (W - S )
-    if keys[pygame.K_w] and left_paddle_y > 0:
+    if keys[pygame.K_w] and left_paddle_y > 0:  # make sure paddle does not go off the screen
         left_paddle_y -= paddle_speed
-    if keys[pygame.K_s] and left_paddle_y < HEIGHT - paddle_height:
+    if keys[pygame.K_s] and left_paddle_y < HEIGHT - paddle_height:  # make sure paddle does not go below
         left_paddle_y += paddle_speed
 
     # right paddle movement (up - down arrow keys)
@@ -168,10 +171,12 @@ while running:
 
     # fill the screen green (for now)
     screen.fill((0, 120, 0))
+
     # draw line down the middle of the screen
     pygame.draw.line(screen, (0, 0, 0), (WIDTH // 2, 0), (WIDTH // 2, HEIGHT), 3)
 
     screen.blit(ball, ball_rect)  # draw ball
+
     # draw paddles
     pygame.draw.rect(screen, (255, 255, 255),
                      (left_paddle_x, left_paddle_y, paddle_width, paddle_height))  # left paddle
@@ -192,3 +197,7 @@ while running:
     clock.tick(60)
 
 pygame.quit()
+
+# add difficulty that allows you to change ball speed, and paddle size 
+# add directional movement variable on where the ball is hit
+# increase ball speed based on total score
